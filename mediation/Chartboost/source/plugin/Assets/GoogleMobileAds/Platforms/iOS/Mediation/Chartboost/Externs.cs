@@ -23,7 +23,22 @@ namespace GoogleMobileAds.iOS.Mediation.Chartboost
     internal class Externs
     {
         [DllImport("__Internal")]
-        internal static extern void GADUMRestrictDataCollection(bool shouldRestrict);
+        internal static extern void GADUMChartboostAddGDPRDataUseConsent(int gdprConsent);
+
+        [DllImport("__Internal")]
+        internal static extern void GADUMChartboostAddCCPADataUseConsent(int ccpaConsent);
+
+        [DllImport("__Internal")]
+        internal static extern void GADUMChartboostAddCustomGDPRDataUseConsent(string customConsent);
+
+        [DllImport("__Internal")]
+        internal static extern void GADUMChartboostAddCustomCCPADataUseConsent(string customConsent);
+
+        [DllImport("__Internal")]
+        internal static extern void GADUMChartboostClearGDPRDataUseConsent();
+
+        [DllImport("__Internal")]
+        internal static extern void GADUMChartboostClearCCPADataUseConsent();
     }
 }
 

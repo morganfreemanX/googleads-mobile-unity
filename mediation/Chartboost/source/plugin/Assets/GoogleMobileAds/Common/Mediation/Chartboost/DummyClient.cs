@@ -17,6 +17,8 @@ using System.Reflection;
 
 using UnityEngine;
 
+using GoogleMobileAds.Api.Mediation.Chartboost;
+
 namespace GoogleMobileAds.Common.Mediation.Chartboost
 {
     public class DummyClient : IChartboostClient
@@ -26,8 +28,34 @@ namespace GoogleMobileAds.Common.Mediation.Chartboost
             Debug.Log ("Dummy " + MethodBase.GetCurrentMethod ().Name);
         }
 
-        public void RestrictDataCollection(bool shouldRestrict){
-            Debug.Log ("Dummy " + MethodBase.GetCurrentMethod ().Name);
+        public void AddDataUseConsent(ChartboostGDPRConsent gdprConsent)
+        {
+            Debug.Log ("Dummy " + MethodBase.GetCurrentMethod().Name);
+        }
+
+        public void AddDataUseConsent(ChartboostCCPAConsent ccpaConsent)
+        {
+            Debug.Log ("Dummy " + MethodBase.GetCurrentMethod().Name);
+        }
+
+        public void AddDataUseConsent(ChartboostConsentType consentType, string customConsent)
+        {
+            Debug.Log("Dummy " + MethodBase.GetCurrentMethod().Name);
+        }
+
+        public void AddDataUseConsent(string customConsentName, string customConsentValue)
+        {
+            Debug.Log ("Dummy " + MethodBase.GetCurrentMethod().Name);
+        }
+
+        public void ClearDataUseConsent(ChartboostConsentType consentType)
+        {
+            Debug.Log ("Dummy " + MethodBase.GetCurrentMethod().Name);
+        }
+
+        public void ClearDataUseConsent(string privacyStandard)
+        {
+            Debug.Log("Dummy " + MethodBase.GetCurrentMethod().Name);
         }
     }
 }

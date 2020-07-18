@@ -19,18 +19,61 @@ using GoogleMobileAds.Mediation;
 
 namespace GoogleMobileAds.Api.Mediation.Chartboost
 {
+    public enum ChartboostConsentType
+    {
+        GDPR = 0,
+        CCPA
+    }
+
+    public enum ChartboostGDPRConsent
+    {
+        NON_BEHAVIORAL = 0,
+        BEHAVIORAL,
+    }
+
+    public enum ChartboostCCPAConsent
+    {
+        OPT_OUT_SALE = 0,
+        OPT_IN_SALE,
+    }
+
     public class Chartboost
     {
         public static readonly IChartboostClient client = GetChartboostClient();
 
-        public static void RestrictDataCollection(bool shouldRestrict)
-        {
-            client.RestrictDataCollection (shouldRestrict);
-        }
-
         private static IChartboostClient GetChartboostClient()
         {
             return ChartboostClientFactory.ChartboostInstance ();
+        }
+
+        public static void AddDataUseConsent(ChartboostGDPRConsent gdprConsent)
+        {
+            client.AddDataUseConsent(gdprConsent);
+        }
+
+        public static void AddDataUseConsent(ChartboostCCPAConsent ccpaConsent)
+        {
+            client.AddDataUseConsent(ccpaConsent);
+        }
+
+        public static void AddDataUseConsent(ChartboostConsentType consentType, string customConsent)
+        {
+            client.AddDataUseConsent(consentType, customConsent);
+        }
+
+        public static void AddDataUseConsent(string customConsentName, string customConsentValue)
+        {
+            client.AddDataUseConsent(customConsentName, customConsentValue);
+        }
+
+        public static void ClearDataUseConsent(ChartboostConsentType consentType)
+        {
+            client.ClearDataUseConsent(consentType);
+        }
+
+        public static void ClearDataUseConsent(string privacyStandard)
+        {
+            client.ClearDataUseConsent(privacyStandard);
         }
     }
 }

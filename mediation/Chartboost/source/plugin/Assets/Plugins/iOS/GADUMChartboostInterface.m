@@ -14,6 +14,44 @@
 
 #import <Chartboost/Chartboost.h>
 
-void GADUMRestrictDataCollection(BOOL shouldRestrict) {
-  [Chartboost restrictDataCollection:shouldRestrict];
+void GADUMChartboostAddGDPRDataUseConsent(int gdprConsent) {
+  CHBGDPRDataUseConsent *chbGDPRconsent;
+  if (gdprConsent == (int)CHBGDPRConsentNonBehavioral) {
+    chbGDPRconsent = [CHBGDPRDataUseConsent gdprConsent:CHBGDPRConsentNonBehavioral];
+  } else if (gdprConsent == (int)CHBGDPRConsentBehavioral) {
+    chbGDPRconsent = [CHBGDPRDataUseConsent gdprConsent:CHBGDPRConsentBehavioral];
+  }
+  [Chartboost addDataUseConsent:chbGDPRconsent];
+}
+
+void GADUMChartboostAddCCPADataUseConsent(int ccpaConsent) {
+  CHBCCPADataUseConsent *chbCCPAconsent;
+  if (ccpaConsent == (int)CHBCCPAConsentOptOutSale) {
+    chbCCPAconsent = [CHBCCPADataUseConsent ccpaConsent:CHBGDPRConsentBehavioral];
+  } else if (ccpaConsent == (int)CHBCCPAConsentOptInSale) {
+    chbCCPAconsent = [CHBCCPADataUseConsent ccpaConsent:CHBGDPRConsentNonBehavioral];
+  }
+  [Chartboost addDataUseConsent:chbCCPAconsent];
+}
+
+void GADUMChartboostAddCustomGDPRDataUseConsent(const char *_Nonnull customConsent) {
+  CHBCustomDataUseConsent *customDataConsent =
+      [CHBCustomDataUseConsent customConsentWithPrivacyStandard:CHBPrivacyStandardGDPR
+                                                        consent:@(customConsent)];
+  [Chartboost addDataUseConsent:customDataConsent];
+}
+
+void GADUMChartboostAddCustomCCPADataUseConsent(const char *_Nonnull customConsent) {
+  CHBCustomDataUseConsent *customDataConsent =
+      [CHBCustomDataUseConsent customConsentWithPrivacyStandard:CHBPrivacyStandardCCPA
+                                                        consent:@(customConsent)];
+  [Chartboost addDataUseConsent:customDataConsent];
+}
+
+void GADUMChartboostClearGDPRDataUseConsent() {
+  [Chartboost clearDataUseConsentForPrivacyStandard:CHBPrivacyStandardGDPR];
+}
+
+void GADUMChartboostClearCCPADataUseConsent() {
+  [Chartboost clearDataUseConsentForPrivacyStandard:CHBPrivacyStandardCCPA];
 }

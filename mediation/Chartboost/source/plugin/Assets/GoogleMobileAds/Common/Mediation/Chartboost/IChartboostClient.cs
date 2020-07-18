@@ -14,11 +14,32 @@
 
 using System;
 
+using GoogleMobileAds.Api.Mediation.Chartboost;
+
 namespace GoogleMobileAds.Common.Mediation.Chartboost
 {
     public interface IChartboostClient
     {
-        // Enable GDPR data collection restrictions for the Chartboost SDK.
-        void RestrictDataCollection(bool shouldRestrict);
+        // Sets GDPR consent for the Chartboost SDK.
+        void AddDataUseConsent(ChartboostGDPRConsent gdprConsent);
+
+        // Sets CCPA consent for the Chartboost SDK.
+        void AddDataUseConsent(ChartboostCCPAConsent ccpaConsent);
+
+        // Sets a custom data use consent for the Chartboost SDK.
+        // This API should only be used for iOS.
+        void AddDataUseConsent(ChartboostConsentType consentType, string customConsent);
+
+        // Sets a custom data use consent for the Chartboost SDK.
+        // This API should only be used for Android.
+        void AddDataUseConsent(string customConsentName, string customConsentValue);
+
+        // Clears any consent data for the Chartboost SDK.
+        // This API should only be used for iOS.
+        void ClearDataUseConsent(ChartboostConsentType consentType);
+
+        // Clears any consent data for the Chartboost SDK.
+        // This API should only be used for Android.
+        void ClearDataUseConsent(string privacyStandard);
     }
 }
